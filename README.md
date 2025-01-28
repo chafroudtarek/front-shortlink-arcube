@@ -1,50 +1,102 @@
-# React + TypeScript + Vite
+# URL Shortener Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ React-based URL shortening application built with TypeScript and Vite. This application provides a clean and intuitive interface for shortening long URLs into more manageable links.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- URL shortening with instant feedback
+- Copy-to-clipboard functionality
+- Url validation
+- Toast notifications for user feedback
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React 18
+- TypeScript
+- Vite
+- TanStack Query (React Query)
+- Axios
+- TailwindCSS
+- React Toastify
 
-- Configure the top-level `parserOptions` property like this:
+## 📋 Prerequisites
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Node.js (Latest LTS version recommended)
+- npm or yarn
+
+## 🔧 Installation
+
+1. Clone the repository:
+```bash
+git clone [your-repository-url]
+cd frontend
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
 ```
+
+3. Create a `.env` file in the root directory and add your environment variables:
+```env
+VITE_API_URL=your_backend_api_url
+```
+
+## 🚀 Running the Application
+
+### Development Mode
+```bash
+npm run dev
+# or
+yarn dev
+```
+This will start the development server on port 3000.
+
+### Build for Production
+```bash
+npm run build
+# or
+yarn build
+```
+
+### Preview Production Build
+```bash
+npm run preview
+# or
+yarn preview
+```
+
+## 🧪 Linting
+
+To run the linter:
+```bash
+npm run lint
+# or
+yarn lint
+```
+
+To automatically fix linting issues:
+```bash
+npm run lint:fix
+# or
+yarn lint:fix
+```
+
+## 🔗 Project Structure
+
+```
+frontend/
+├── src/
+│   ├── data/
+│   │   ├── models/       # TypeScript interfaces
+│   │   ├── mutations/    # React Query mutations
+│   │   └── services/     # API services
+│   ├── config/          # Configuration files
+│   └── App.tsx          # Main application component
+├── public/             # Static assets
+└── ...config files
+```
+
+
