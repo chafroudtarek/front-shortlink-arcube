@@ -58,15 +58,20 @@ class HttpClient {
     );
   }
 
-  async post<T>(url: string, paramsData?: HttpParamsType<T>): Promise<AxiosResponse<T>> {
+  async post<TResponse, TRequest = any>(
+    url: string,
+    paramsData?: HttpParamsType<TRequest>
+  ): Promise<TResponse> {
     const { body = {}, config = {}, headers = {} } = paramsData || {};
-
-    return this.instance.post<T>(url, body, {
+    
+    const response = await this.instance.post<TResponse>(url, body, {
       ...config,
       headers: {
         ...headers,
       },
     });
+    
+    return response.data;
   }
 
   async get<T>(url: string, paramsData?: HttpParamsType<T>): Promise<AxiosResponse<T>> {
