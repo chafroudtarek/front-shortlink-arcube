@@ -6,18 +6,27 @@ function App() {
   const useGenerateShortUrlMutation = useGenerateShortUrl()
   const [currentUrl, setCurrentUrl] = useState<string>('')
   const [genratedLink, setGenratedLink] = useState<string>("https://short.url/abc123")
-
-
+  const [copied, setCopied] = useState(false)
 
   const handleGenerateShortUrl = () => {
     useGenerateShortUrlMutation.mutate(currentUrl, {
-        onSuccess: data => {
-          setGenratedLink(data.shortUrl)
-         
-        }
-      })
-    
+      onSuccess: data => {
+        setGenratedLink(data.shortUrl)
+        setCopied(false)
+      }
+    })
   }
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(genratedLink)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000) 
+    } catch (err) {
+      console.error('Failed to copy text:', err)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -58,8 +67,15 @@ function App() {
                       value={genratedLink}
                       className="flex-1 px-4 py-2 rounded-lg bg-white border border-gray-300 focus:outline-none"
                     />
-                    <button className="px-4 py-2 text-sm text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg hover:from-blue-600">
-                      Copy
+                    <button 
+                      onClick={handleCopy}
+                      className={`px-4 py-2 text-sm text-white bg-gradient-to-r ${
+                        copied 
+                          ? 'from-green-500 to-green-600' 
+                          : 'from-blue-500 to-indigo-500 hover:from-blue-600'
+                      } rounded-lg transition-colors duration-200`}
+                    >
+                      {copied ? 'Copied' : 'Copy'}
                     </button>
                   </div>
                  
