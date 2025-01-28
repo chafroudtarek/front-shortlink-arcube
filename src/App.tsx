@@ -1,6 +1,23 @@
+import { useState } from 'react'
 import './App.css'
+import { useGenerateShortUrl } from './data/mutations/url.mutation'
 
 function App() {
+  const useGenerateShortUrlMutation = useGenerateShortUrl()
+  const [currentUrl, setCurrentUrl] = useState<string>('')
+  const [genratedLink, setGenratedLink] = useState<string>("https://short.url/abc123")
+
+
+
+  const handleGenerateShortUrl = () => {
+    useGenerateShortUrlMutation.mutate(currentUrl, {
+        onSuccess: data => {
+          setGenratedLink(data.shortUrl)
+         
+        }
+      })
+    
+  }
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -21,12 +38,13 @@ function App() {
                     <input
                       type="url"
                       placeholder="https://example.com/xxxxxxx"
+                      onChange={(e) => setCurrentUrl(e.target.value)}
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                  
 
-                  <button className="w-full py-3 px-6 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg hover:from-blue-600 hover:to-indigo-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transform transition hover:-translate-y-0.5">
+                  <button onClick={handleGenerateShortUrl} className="w-full py-3 px-6 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg hover:from-blue-600 hover:to-indigo-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transform transition hover:-translate-y-0.5">
                     Shorten URL
                   </button>
                 </div>
@@ -37,7 +55,7 @@ function App() {
                     <input
                       type="text"
                       readOnly
-                      value="https://short.url/abc123"
+                      value={genratedLink}
                       className="flex-1 px-4 py-2 rounded-lg bg-white border border-gray-300 focus:outline-none"
                     />
                     <button className="px-4 py-2 text-sm text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg hover:from-blue-600">
