@@ -1,5 +1,5 @@
-import { ApiUrlEnum } from "@/config/api-url.enum"
-import { httpClient } from "@/utils/shared-base-http"
+import { ApiUrlEnum } from "../../config/api-url.enum"
+import { httpClient } from "../../utils/shared-base-http"
 import { type UrlApi, type UrlModel, type UrlRequestBody, mapUrlFromApi } from "../models/url"
 
 

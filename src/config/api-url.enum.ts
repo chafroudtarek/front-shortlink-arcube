@@ -1,4 +1,4 @@
 export enum ApiUrlEnum {
 
-    GENERATE_SHORT_URL = "/V1/urls/shorten"
+    GENERATE_SHORT_URL = "/v1/api/urls/shorten"
 }
