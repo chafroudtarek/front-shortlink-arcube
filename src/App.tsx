@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { useGenerateShortUrl } from './data/mutations/url.mutation'
+import { toast } from 'react-toastify'
 
 function App() {
   const useGenerateShortUrlMutation = useGenerateShortUrl()
@@ -11,6 +12,10 @@ function App() {
   const handleGenerateShortUrl = () => {
     useGenerateShortUrlMutation.mutate(currentUrl, {
       onSuccess: data => {
+        toast.success('Short URL generated successfully! 🔗', {
+          position: "top-center",
+          autoClose:1000
+        });
         setGenratedLink(data.shortUrl)
         setCopied(false)
       }
@@ -54,7 +59,7 @@ function App() {
                  
 
                   <button onClick={handleGenerateShortUrl} className="w-full py-3 px-6 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg hover:from-blue-600 hover:to-indigo-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transform transition hover:-translate-y-0.5">
-                    Shorten URL
+                   {useGenerateShortUrlMutation.isPending ? 'Shortening...' : 'Shorten URL'} 
                   </button>
                 </div>
 
